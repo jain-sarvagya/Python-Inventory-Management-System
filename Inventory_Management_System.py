@@ -31,6 +31,11 @@ def requires_auth(f):
         return f(*args, **kwargs)
     return decorated
 
+@app.route('/')
+def index():
+    return "✅ Inventory Management System API is running!"
+
+
 #post method of category
 
 @app.route("/category/post", methods=["POST"])
