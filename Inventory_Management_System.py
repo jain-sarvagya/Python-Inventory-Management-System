@@ -6,9 +6,9 @@ from functools import wraps
 
 
 app=Flask(__name__)
-app.config["MYSQL_HOST"]="Enter your host name"
-app.config["MYSQL_USER"]="Enter user name"
-app.config["MYSQL_PASSWORD"]="Enter password"
+app.config["MYSQL_HOST"]="localhost"
+app.config["MYSQL_USER"]="root"
+app.config["MYSQL_PASSWORD"]="sar761@SARVAG"
 app.config["MYSQL_DB"]="product"
 mysql=MySQL(app)
 
