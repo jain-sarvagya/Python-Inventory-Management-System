@@ -1,26 +1,50 @@
 from flask import Flask, request, jsonify
 import pyodbc
-import os
 from azure import identity
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # THIS MUST BE CALLED BEFORE os.environ.get()
 
 #P@#sword01
 
 app = Flask(__name__)
-# mysql=app(MySQL)
 
-username = "rootadmin"
-password = "P@#sword01"
-server = "mysqlserver0001.database.windows.net" 
-database = "testpoc0001"
+# Load from environment
+server = os.environ.get("DB_SERVER")
+username = os.environ.get("DB_USERNAME")
+password = os.environ.get("DB_PASSWORD")
+database = os.environ.get("DB_NAME")
 
-# connection_string = os.environ["AZURE_SQL_CONNECTIONSTRING"]
-connection_string="Driver={SQL Server};Server=tcp:mysqlserver0001.database.windows.net,1433;Database=testpoc0001;Uid=rootadmin;Pwd=P@#sword01;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+# Debug print
+# print("Server:", server)
+# print("Username:", username)
+# print("Password:", password)
+# print("Database:", database)
+
+# Construct connection string
+connection_string = (
+    f"Driver={{ODBC Driver 18 for SQL Server}};"
+    f"Server=tcp:{server},1433;"
+    f"Database={database};"
+    f"Uid={username};"
+    f"Pwd={password};"
+    f"Encrypt=yes;"
+    f"TrustServerCertificate=no;"
+    f"Connection Timeout=30;"
+)
+
+
+
+# username = "rootadmin"
+# password = "P@#sword01"
+# server = "mysqlserver0001.database.windows.net" 
+# database = "testpoc0001"
+
+# connection_string="Driver={ODBC Driver 18 for SQL Server};Server=tcp:mysqlserver0001.database.windows.net,1433;Database=testpoc0001;Uid=rootadmin;Pwd=P@#sword01;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
 
 def get_conn():
-    # credential = identity.DefaultAzureCredential(exclude_interactive_browser_credential=False)
-    # token_bytes = credential.get_token("https://database.windows.net/.default").token.encode("UTF-16-LE")
-    # token_struct = struct.pack(f'<I{len(token_bytes)}s', len(token_bytes), token_bytes)
-    SQL_COPT_SS_ACCESS_TOKEN = 1256  # This connection option is defined by microsoft in msodbcsql.h
+
     conn = pyodbc.connect(connection_string)
     return conn
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -395,7 +419,8 @@ def sales_get(user_id):
 
     return jsonify(data[0])  # since you're querying by ID, return the first record only
 
+if __name__ == '__main__':
+    app.run(debug = True)
 
 
-if (__name__)=="__main__":
-    app.run(host="0.0.0.0", port=8000)
+
