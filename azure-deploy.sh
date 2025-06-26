@@ -4,7 +4,7 @@
 APP_NAME="ims-app-$RANDOM"
 RESOURCE_GROUP="ims-rg"
 PLAN_NAME="ims-app-plan"
-LOCATION="eastus"
+LOCATION="north europe"
 
 echo "Logging in to Azure..."
 az login
