@@ -2,7 +2,7 @@
 
 # Config
 APP_NAME="ims-app-$RANDOM"
-RESOURCE_GROUP=""
+RESOURCE_GROUP="flask-rg-test"
 PLAN_NAME="app-flask-ims"
 LOCATION="North Europe"
 
