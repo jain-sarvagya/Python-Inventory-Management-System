@@ -1,22 +1,15 @@
 from flask import Flask, request, jsonify
 import pyodbc
-<<<<<<< HEAD
 from azure import identity
 from dotenv import load_dotenv
 import os
 
 load_dotenv()  # THIS MUST BE CALLED BEFORE os.environ.get()
-=======
-import os
-import identity
->>>>>>> eaaad3d34138f99d23d536d6843e2abd0a909102
 
 #P@#sword01
 
 app = Flask(__name__)
-# mysql=app(MySQL)
 
-<<<<<<< HEAD
 server = os.environ.get("DB_SERVER")
 username = os.environ.get("DB_USERNAME")
 password = os.environ.get("DB_PASSWORD")
@@ -39,24 +32,6 @@ def get_conn():
 
     conn = pyodbc.connect(connection_string)
     return conn
-=======
-username = "rootadmin"
-password = "P@#sword01"
-server = "mysqlserver0001.database.windows.net" 
-database = "testpoc0001"
-
-# connection_string = os.environ["AZURE_SQL_CONNECTIONSTRING"]
-connection_string="Driver={SQL Server};Server=tcp:mysqlserver0001.database.windows.net,1433;Database=testpoc0001;Uid=rootadmin;Pwd=P@#sword01;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
-
-def get_conn():
-    # credential = identity.DefaultAzureCredential(exclude_interactive_browser_credential=False)
-    # token_bytes = credential.get_token("https://database.windows.net/.default").token.encode("UTF-16-LE")
-    # token_struct = struct.pack(f'<I{len(token_bytes)}s', len(token_bytes), token_bytes)
-    SQL_COPT_SS_ACCESS_TOKEN = 1256  # This connection option is defined by microsoft in msodbcsql.h
-    conn = pyodbc.connect(connection_string)
-    return conn
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
->>>>>>> eaaad3d34138f99d23d536d6843e2abd0a909102
 
 conn = get_conn()
 
@@ -74,23 +49,15 @@ def category_post():
 
         cur.execute("INSERT INTO category (c_name) OUTPUT INSERTED.c_id VALUES (?)", (c_name,))
 
-<<<<<<< HEAD
-=======
-        # Get the last inserted ID (optional, but useful for knowing which ID was assigned)
->>>>>>> eaaad3d34138f99d23d536d6843e2abd0a909102
         cur.execute("SELECT @@IDENTITY")
         last_inserted_id = cur.fetchone()[0]
         conn.commit()
         cur.close()
         return jsonify({"message": "Data added successfully", "c_id": last_inserted_id}), 201
 
-<<<<<<< HEAD
 @app.route("/")
 def hello():
     return "Hello your api is Running"
-=======
-
->>>>>>> eaaad3d34138f99d23d536d6843e2abd0a909102
 
 
 
@@ -428,7 +395,6 @@ def sales_get(user_id):
     rows = cur.fetchall()
     column_names = [desc[0] for desc in cur.description]
     cur.close()
-<<<<<<< HEAD
 
     if not rows:
         return jsonify({"message": "Data not found. Enter a valid ID"}), 404
@@ -443,18 +409,3 @@ if __name__ == '__main__':
 
 
 
-=======
-
-    if not rows:
-        return jsonify({"message": "Data not found. Enter a valid ID"}), 404
-
-    # Convert rows to list of dicts
-    data = [dict(zip(column_names, row)) for row in rows]
-
-    return jsonify(data[0])  # since you're querying by ID, return the first record only
-
-
-
-if (__name__)=="__main__":
-    app.run(host="0.0.0.0", port=8000)
->>>>>>> eaaad3d34138f99d23d536d6843e2abd0a909102
