@@ -2,9 +2,9 @@
 
 # Config
 APP_NAME="ims-app-$RANDOM"
-RESOURCE_GROUP="rg"
+RESOURCE_GROUP=""
 PLAN_NAME="app-flask-ims"
-LOCATION="westus"
+LOCATION="North Europe"
 
 echo "Logging in to Azure..."
 az login
