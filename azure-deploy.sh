@@ -3,7 +3,7 @@
 # Config
 APP_NAME="ims-app-$RANDOM"
 RESOURCE_GROUP="rg"
-PLAN_NAME="ims-app-plan"
+PLAN_NAME="testpoc001"
 LOCATION="north europe"
 
 echo "Logging in to Azure..."
