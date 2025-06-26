@@ -4,7 +4,8 @@
 APP_NAME="ims-app-$RANDOM"
 RESOURCE_GROUP="flask-rg-test"
 PLAN_NAME="app-flask-ims"
-LOCATION="North Europe"
+LOCATION="NorthEurope"
+SKU="B1"
 
 echo "Logging in to Azure..."
 az login
@@ -13,7 +14,7 @@ echo "Creating Resource Group..."
 az group create --name $RESOURCE_GROUP --location $LOCATION
 
 echo "Creating App Service Plan..."
-az appservice plan create --name $PLAN_NAME --resource-group $RESOURCE_GROUP --sku F1 --is-linux
+az appservice plan create --name $PLAN_NAME --resource-group $RESOURCE_GROUP --sku $SKU --is-linux
 
 echo "Creating Web App ($APP_NAME)..."
 az webapp create \
