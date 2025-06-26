@@ -2,7 +2,7 @@
 
 # Config
 APP_NAME="ims-app-$RANDOM"
-RESOURCE_GROUP="ims-rg"
+RESOURCE_GROUP="rg"
 PLAN_NAME="ims-app-plan"
 LOCATION="north europe"
 
