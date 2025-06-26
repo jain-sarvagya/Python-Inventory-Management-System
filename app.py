@@ -10,19 +10,12 @@ load_dotenv()  # THIS MUST BE CALLED BEFORE os.environ.get()
 
 app = Flask(__name__)
 
-# Load from environment
 server = os.environ.get("DB_SERVER")
 username = os.environ.get("DB_USERNAME")
 password = os.environ.get("DB_PASSWORD")
 database = os.environ.get("DB_NAME")
 
-# Debug print
-# print("Server:", server)
-# print("Username:", username)
-# print("Password:", password)
-# print("Database:", database)
 
-# Construct connection string
 connection_string = (
     f"Driver={{ODBC Driver 18 for SQL Server}};"
     f"Server=tcp:{server},1433;"
@@ -35,19 +28,10 @@ connection_string = (
 )
 
 
-
-# username = "rootadmin"
-# password = "P@#sword01"
-# server = "mysqlserver0001.database.windows.net" 
-# database = "testpoc0001"
-
-# connection_string="Driver={ODBC Driver 18 for SQL Server};Server=tcp:mysqlserver0001.database.windows.net,1433;Database=testpoc0001;Uid=rootadmin;Pwd=P@#sword01;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
-
 def get_conn():
 
     conn = pyodbc.connect(connection_string)
     return conn
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 conn = get_conn()
 
@@ -65,14 +49,15 @@ def category_post():
 
         cur.execute("INSERT INTO category (c_name) OUTPUT INSERTED.c_id VALUES (?)", (c_name,))
 
-        # Get the last inserted ID (optional, but useful for knowing which ID was assigned)
         cur.execute("SELECT @@IDENTITY")
         last_inserted_id = cur.fetchone()[0]
         conn.commit()
         cur.close()
         return jsonify({"message": "Data added successfully", "c_id": last_inserted_id}), 201
 
-
+@app.route("/")
+def hello():
+    return "Hello your api is Running"
 
 
 
