@@ -4,29 +4,16 @@ from azure import identity
 from dotenv import load_dotenv
 import os
 
-load_dotenv()  # THIS MUST BE CALLED BEFORE os.environ.get()
+load_dotenv()  
 
 #P@#sword01
 
 app = Flask(__name__)
 
-server = os.environ.get("DB_SERVER")
-username = os.environ.get("DB_USERNAME")
-password = os.environ.get("DB_PASSWORD")
-database = os.environ.get("DB_NAME")
 
 
-connection_string = (
-    f"Driver={{ODBC Driver 18 for SQL Server}};"
-    f"Server=tcp:{server},1433;"
-    f"Database={database};"
-    f"Uid={username};"
-    f"Pwd={password};"
-    f"Encrypt=yes;"
-    f"TrustServerCertificate=no;"
-    f"Connection Timeout=30;"
-)
 
+connection_string =os.environ.get("CONNECTION_STRING")
 
 def get_conn():
 
