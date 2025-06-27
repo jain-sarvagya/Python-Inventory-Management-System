@@ -401,7 +401,7 @@ def sales_get(user_id):
     return jsonify(data[0])  # since you're querying by ID, return the first record only
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
+    app.run()
 
 
 
