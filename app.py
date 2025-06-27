@@ -8,10 +8,21 @@ load_dotenv()
 
 app = Flask(__name__)
 
+db_server = os.getenv("DB_SERVER")
+db_name = os.getenv("DB_NAME")
+db_username = os.getenv("DB_USERNAME")
+db_password = os.getenv("DB_PASSWORD")
 
-
-
-connection_string =os.environ.get("CONNECTION_STRING")
+connection_string = (
+    "Driver={ODBC Driver 18 for SQL Server};"
+    f"Server=tcp:{db_server},1433;"
+    f"Database={db_name};"
+    f"Uid={db_username};"
+    f"Pwd={db_password};"
+    "Encrypt=yes;"
+    "TrustServerCertificate=no;"
+    "Connection Timeout=30;"
+)
 
 def get_conn():
 
