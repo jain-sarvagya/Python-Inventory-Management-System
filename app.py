@@ -6,8 +6,6 @@ import os
 
 load_dotenv()  
 
-#P@#sword01
-
 app = Flask(__name__)
 
 
