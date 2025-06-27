@@ -14,7 +14,7 @@ db_username = os.getenv("DB_USERNAME")
 db_password = os.getenv("DB_PASSWORD")
 
 connection_string = (
-    "Driver={ODBC Driver 18 for SQL Server};"
+    "Driver={ODBC Driver 17 for SQL Server};"
     f"Server=tcp:{db_server},1433;"
     f"Database={db_name};"
     f"Uid={db_username};"
