@@ -25,7 +25,7 @@ connection_string = (
 )
 
 def get_conn():
-
+    print(connection_string)
     conn = pyodbc.connect(connection_string)
     return conn
 
